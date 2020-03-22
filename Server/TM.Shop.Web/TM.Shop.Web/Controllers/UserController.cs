@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using TM.Shop.IServices;
 using TM.Shop.Models.UserModel;
@@ -11,12 +12,21 @@ namespace TM.Shop.Web.Controllers
     {
         private IUserService userService;
 
-        public UserController(IUserService userService) {
+        private ILogger<UserController> logger;
+
+        public UserController(IUserService userService, ILogger<UserController> logger) {
             this.userService = userService;
+            this.logger = logger;
         }
 
-        public IEnumerable<User> Get(long userId)
+        /// <summary>
+        /// 获取所有用户
+        /// </summary>
+        /// <returns>返回所有用户</returns>
+        [HttpGet]
+        public IEnumerable<User> Get()
         {
+            logger.LogDebug("test");
             return userService.GetUsers();
         }
     }
