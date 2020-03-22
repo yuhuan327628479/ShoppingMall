@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using TM.Shop.Repositories;
 using UI.Common.IocUtil;
 
 namespace TM.Shop.Web
@@ -27,6 +22,8 @@ namespace TM.Shop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterAssembly("TM.Shop.Services");
+            services.RegisterAssembly("TM.Shop.Repositories");
+            services.AddDbContext<ShopDBContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

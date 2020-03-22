@@ -7,6 +7,6 @@ namespace TM.Shop.IServices
 {
     public interface IUserService
     {
-        User Get();
+        IEnumerable<User> GetUsers();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using TM.Shop.IServices;
 using TM.Shop.Models.UserModel;
 
@@ -14,9 +15,9 @@ namespace TM.Shop.Web.Controllers
             this.userService = userService;
         }
 
-        public User Get(long userId)
+        public IEnumerable<User> Get(long userId)
         {
-            return userService.Get();
+            return userService.GetUsers();
         }
     }
 }

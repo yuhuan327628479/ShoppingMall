@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using TM.Shop.IRepositories.UserRepositories;
 using TM.Shop.IServices;
-using TM.Shop.Models.UserModel;
 using UI.Common.IocUtil;
 
 namespace TM.Shop.Services.User
 {
-    [SingleService]
+    [Scope]
     public class UserService : IUserService
     {
-        public UserService()
+        private IUserRepositiories repositiories;
+
+        public UserService(IUserRepositiories repositiories)
         {
+            this.repositiories = repositiories;
         }
 
-        public Models.UserModel.User Get()
+        public IEnumerable<Models.UserModel.User> GetUsers()
         {
-            return new Models.UserModel.User
-            {
-                Name = "abc" 
-            };
+            return repositiories.GetUsers();
         }
     }
 }

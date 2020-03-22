@@ -36,6 +36,11 @@ namespace UI.Common.IocUtil
             foreach (Type serviceType in serviceTypes)
             {
                 var attr = serviceType.GetCustomAttribute<ServiceTagAttribute>(true);
+                if (attr == null)
+                {
+                    continue;
+                }
+
                 if (actions.TryGetValue(attr.GetType(), out Action<IServiceCollection, Type, Type> action))
                 {
                     if (attr.IocType != null)
